@@ -1,5 +1,4 @@
 package com.test.activemq.jdk8;
-
 import org.apache.activemq.ActiveMQSslConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,9 +28,9 @@ import java.util.regex.Pattern;
  *
  * Exit code: 0 = message round trip OK, 1 = failed, 2 = bad arguments.
  */
-public class Main {
 
-    public static void main(String[] args) {
+public class SendReceive {
+	public static void main(String[] args) {
         if (has(args, "-h") || has(args, "--help")) {
             usage();
             return;
@@ -52,7 +51,7 @@ public class Main {
 
         // Must happen BEFORE the first logger is created and before any SSL class is touched.
         configureLogging(verbose);
-        Logger log = LoggerFactory.getLogger(Main.class);
+        Logger log = LoggerFactory.getLogger(SendReceive.class);
 
         boolean ok = runTest(log, verbose, url, user, password, queueName, timeoutMs);
         log.info("RESULT: {}", ok ? "PASS" : "FAIL");

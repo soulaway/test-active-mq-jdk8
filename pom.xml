@@ -19,7 +19,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<main.class>com.test.activemq.jdk8.Main</main.class>
+		<main.class></main.class>
 		<!-- lastest of ActiveMQ client that is happy on Java 8 + javax.jms 1.1 -->
 		<activemq.version>5.15.16</activemq.version>
 		<slf4j.version>1.7.36</slf4j.version>
@@ -42,7 +42,23 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 	</dependencies>
-
+	<profiles>
+		<profile>
+			<id>send-receive</id>
+			<properties>
+				<main.class>com.test.activemq.jdk8.SendReceive</main.class>
+			</properties>
+		</profile>
+		<profile>
+			<id>forwarder</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<main.class>com.test.activemq.jdk8.Forwarder</main.class>
+			</properties>
+		</profile>
+	</profiles>
 	<build>
 		<!-- fat jar will be target/mq-test.jar -->
 		<finalName>${project.artifactId}</finalName>
